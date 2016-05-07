@@ -6,26 +6,21 @@
  <br>
 
  <?php
+
+  include 'support.php';
+
   $username = $_POST['player'];
   $questions = $_POST['game'];
 
   $score  = 0;
   $number = 1;
 
-  if (file_exists($questions . '.xml')) {
-    	
-	$xml = simplexml_load_file($questions . '.xml');
- 
-   } else {    
-
-	echo 'cannot find ' , $questions, '.xml',PHP_EOL;
-    	exit('Failed to open answers.');
-   }
+  $xml = getXml($questions . '.xml');
 
   if( $username != null )
   {
-    echo( "Thanks for you for playing $game, $username <hr>" );
-    $file = $username;
+    echo( "Thanks for you for playing $questions, $username <hr>" );
+    $file = scoresFilename($username , $questions);;
   } else {
 	echo 'cannot submit without nominating a player!';
 	exit ( 'No player nominated');
@@ -37,10 +32,6 @@
 
   foreach ( $xml->question as $question){
 
-	/*
-	echo $number, '] ', $question->answer, ' == ' , $_POST[$number], ( $question->answer == $_POST[$number] );
-	echo '<br>';
-	*/
 	if ( $question->answer == $_POST[$number] ){
 		$score = $score + 1;
 	}
@@ -51,11 +42,10 @@
 
   echo  "<br> <b>Your Score is</b> " , $score ; 
 	
-  $file = $username;
-  $contents = 'Score|' . $number . PHP_EOL;
+  $contents = 'Score|' . $score . PHP_EOL;
 
   file_put_contents($file, $contents, FILE_APPEND | LOCK_EX);
  ?>
-
+ <a href="welcome.php"> The Leaderboard</a>
  </body>
 </html>
