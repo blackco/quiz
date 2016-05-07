@@ -33,6 +33,12 @@ function games(){
 
 }
 
+function scoresFilename($user,$game){
+
+	return $user . '_' . $game;
+}
+
+
 function scores(){
 
   echo '<table style="width:100%">';
@@ -49,7 +55,7 @@ function scores(){
 	
 	foreach ($games->game as $game){
 		
-   		$score=$score + getScore($player->id . '_' . $game->id);	
+   		$score=$score + getScore(scoresFilename($player->id , $game->id));	
  	}
 	echo '<tr>';
 	echo '<td>', $player->name , '</td>';
