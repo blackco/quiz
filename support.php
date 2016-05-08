@@ -86,4 +86,22 @@ function getScore($filename){
 		
 }
 
+function getPlayerAnswers($player , $game ){
+
+   $filename = scoresFilename($player , $game);
+   $stack = array("Quiz does not start at zero, arrays do,so pad!");
+   if (file_exists($filename)) {
+
+        $lines = file($filename);
+        foreach( $lines as $line_num => $line ){
+
+                $items  = explode('|', $line);
+                if ( $items[0] != "Score" ){
+			array_push( $stack , $items[1]);
+                }
+        }
+    }
+    return $stack;
+}
+
 ?>
