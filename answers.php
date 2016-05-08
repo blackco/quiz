@@ -36,7 +36,7 @@
 		$score = $score + 1;
 	}
 
- 	file_put_contents($file, $number . '|' . $_POST[$number] . PHP_EOL, FILE_APPEND | LOCK_EX);
+ 	file_put_contents($file, $number . '|' . $_POST[$number] .'|' . PHP_EOL , FILE_APPEND | LOCK_EX);
         $number = $number + 1;
   }
 
