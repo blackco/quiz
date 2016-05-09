@@ -28,7 +28,17 @@ $playerAnswers = getPlayerAnswers($user,$quiz);
 echo '<input type="hidden" name="game" value="',$quiz,'" />';
 echo '<input type="hidden" name="player" value="',$user,'" />';
 
+function radioButtons($questionNo, $answerVal , $checked){
+	echo '<div class="radio"><label>';
+        echo '<input type=radio name="', $questionNo ,'" value="', $answerVal, '" ',  $checked,'>', $answerVal;
+        echo '</label></div>';
+}
+
 foreach ( $xml->question as $question){
+
+	$checkedA = '';
+	$checkedB = '';
+	$checkedC = '';
 
 	if ( $question->answerA == $playerAnswers[$number]){
 		$checkedA = " checked";
@@ -38,22 +48,19 @@ foreach ( $xml->question as $question){
                 $checkedC = " checked";
 	}
 
+
 	if ( $question->type == "Photo" ){
 	    echo '<img src="', $question->photo ,'" class="img-circle" height="200" width="236"><br>', PHP_EOL;
 
 	}
 	echo '<b>Question [', $number, ']</b> ' ;
 	echo '<b>',$question->question, '</b><br>',PHP_EOL;
-	echo '<div class="radio"><label>';
-	echo '<input type=radio name="', $number ,'" value="', $question->answerA, '" ',  $checkedA,'>', $question->answerA;
-	echo '</label></div>';
-	echo '<div class="radio"><label>';
-        echo '<input type=radio name="', $number ,'" value="', $question->answerB, '" ',  $checkedB,'>', $question->answerB;
-	echo '</label></div>';
-	echo '<div class="radio"><label>';
-        echo '<input type=radio name="', $number ,'" value="', $question->answerC, '" ',  $checkedC,'>', $question->answerC;
-	echo '</label></div>';
 
+
+	radioButtons($number, $question->answerA , $checkedA);
+	radioButtons($number, $question->answerB , $checkedB);
+	radioButtons($number, $question->answerC , $checkedC);
+	
 	echo '<br>';
 	$number = $number +1; 
 }
