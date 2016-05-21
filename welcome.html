@@ -1,0 +1,66 @@
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="app/bower_components/angular/angular.js"></script>
+  <script src="app/bower_components/angular-route/angular-route.js"></script>
+
+<style>
+table, th, td {
+    border: 1px solid black;
+}
+</style>
+
+</head>
+<body>
+<form action="quiz.php" method="post">
+
+<div  ng-app="myApp" ng-controller="playerCtrl">
+<label for="player">Who are you?</label>
+	players = {{players}}
+	<select class="form-control" name="player">
+		<div ng-repeat="p in players">
+			<option value={{p.id}}> {{p.name}}  </option>
+		</div>
+	</select>
+</div>
+<div ng-app="myApp ng-controller="gameCtrl">
+<label for="quiz">Pick Your Game</label>
+      games = 	{{games}}
+      <select class="form-control" name="game">
+		<div ng-repeat="g in games">
+			<option value={{g.id}}> {{g.name}} </option>
+		</div>
+      </select>
+    </ul>
+</div>
+<br>
+<input type="submit" />
+</form>
+
+<br>
+<p><b>Leaderboard</b></p>
+<script>
+var app = angular.module('myApp', []);
+app.controller('playerCtrl', function($scope, $http) {
+   $http.get("get_players.php")
+   .then(function (response) {
+                $scope.players = response.data;
+
+  });
+});
+
+app.controller('gameCtrl', function($scope, $http) {
+   $http.get("get_games.php")
+   .then(function (response) {
+                $scope.games = response.data;
+
+  });
+});
+</script>
+</body>
+</html>
+

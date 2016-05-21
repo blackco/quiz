@@ -1,0 +1,56 @@
+<html>
+ <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="app/bower_components/angular/angular.js"></script>
+  <script src="app/bower_components/angular-route/angular-route.js"></script>
+ 
+  <title>Quiz</title>
+ </head>
+
+ <body>
+ 	<form action="answers.php" method="post">
+  
+
+	<div ng-app="myApp" ng-controller="quizCtrl">
+ 
+	questions = {{questions}}
+	<ul>
+  		<div ng-repeat="q in questions">
+    			<li><b>{{q.question}}</b><br>
+				<div ng-repeat="o in q.options">
+					<div class="radio">
+						<label>
+							<input type=radio 
+								name=q.question
+								value={{o.text}}
+								checked={{o.checked}}
+							> {{o.text}} 
+						</label>
+					</div>
+				</div>
+			</li>
+  		</tr>
+	</ul>
+ 
+</div>
+
+	<input type="submit" value="Submit">
+</form>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('quizCtrl', function($scope, $http) {
+   $http.get("get_quiz.php")
+   .then(function (response) {		
+		$scope.questions = response.data;
+		$scope.foo = "Hello World";
+
+  });
+});
+</script>
+</body>
+</html>
