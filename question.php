@@ -2,6 +2,8 @@
 
 class question
 {
+	public $questionId;
+
 	public $question; 
 	
 	public $answer;
