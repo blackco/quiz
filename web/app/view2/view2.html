@@ -1,0 +1,21 @@
+<form action="games/set_answers.php" method="post">
+
+<input type="hidden" name="game" value={{quizId}} />
+<input type="hidden" name="player" value="Colin"/>
+<input type="hidden" name="questions" value={{questions.length}} />
+
+<ul class="list_group" ng-repeat="question in questions">
+	
+	<li class="list-group-item"><b>{{question.questionId}}) {{question.question}}</b></li>
+	<div class="radio" ng-repeat="possibleAnswer in question.options">
+  		<label><input type="radio" 
+  			 name={{question.questionId}} 
+  			 value={{possibleAnswer.text}}
+  			 checked={{possibleAnswer.checked}}>
+  			{{possibleAnswer.text}}</label>
+	</div>
+
+</ul>
+<input type="submit" class="btn btn-info btn-block" value="Submit">
+</form>
+
