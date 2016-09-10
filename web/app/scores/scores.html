@@ -1,0 +1,31 @@
+<p>This is the partial for scores</p>
+
+JSON = {{scores}}
+
+ <ul> 
+ 
+
+<table class="scores" border="1" style="width:100%" background-color:#f1f1c1>
+  <tr>
+        <th>Player</th>
+        <th>Score</th>
+  </tr>
+  <tr ng-repeat="score in scores">
+<!--  
+        <td>
+          <img ng-src="/app/img/{{photo.id}}.jpg" height="100" width-"100">
+        </td>
+-->
+        <td>
+           {{score.playerId}}
+        </td> 
+        <td> 
+           {{score.score}}
+        </td>
+             
+        
+  </tr>
+ </table> 
+
+
+ </ul>
