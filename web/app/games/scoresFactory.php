@@ -26,8 +26,6 @@ class MySqlScoreFactory implements ScoresFactory{
 		.      "AND  q.answer = a.answer "
 		.      "GROUP BY playerId";
 
-		$sql = "SELECT 'Colin' playerId, 1 score ";
-
 		$result = $conn->query($sql);
 		$scores = Array();
 
