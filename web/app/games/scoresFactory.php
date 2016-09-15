@@ -19,16 +19,11 @@ class MySqlScoreFactory implements ScoresFactory{
 
 		$conn = getConnection();
 
-		$sql = "SELECT playerId,count(*) score" 
-		.      "FROM Answers a, Questions q "
-		.      "WHERE a.quizId = q.quizId "
-		.      "AND  a.questionId = q.questionId "
-		.      "AND  q.answer = a.answer "
-		.      "GROUP BY playerId";
-
-		$result = $conn->query($sql);
 		$scores = Array();
 
+		$sql = "CALL GetScores()";
+
+	        $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
                 // output data of each row
