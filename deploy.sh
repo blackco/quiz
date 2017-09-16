@@ -13,5 +13,5 @@ cp ${FROM}/web/app/games/* ${TO}/app/games
 cp ${FROM}/web/app/index.html ${TO}/app
 cp ${FROM}/web/app/app.js ${TO}/app
 
-echo '${FROM} = ', ${FROM}
+echo '${FROM} = ' ${FROM}
 
