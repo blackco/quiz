@@ -54,7 +54,7 @@ BEGIN
                  SET o.playerAnswer = "checked"
                  WHERE  a.questionId = o.questionId
                  AND a.quizId = o.quizId
-                 AND a.playerId = "Chloe"
+                 AND a.playerId = "Colin"
                  AND o.possibleAnswer = a.answer;
                   
                  SELECT questionId,possibleAnswer,playerAnswer 
@@ -63,3 +63,38 @@ END //
 DELIMITER ;
 
 
+DELIMITER //
+CREATE PROCEDURE GetScores()
+BEGIN
+
+	 SELECT playerId,count(*) score
+         FROM Answers a, Questions q 
+         WHERE a.quizId = q.quizId 
+         AND  a.questionId = q.questionId 
+         AND  q.answer = a.answer 
+         GROUP BY playerId;
+END //
+DELIMITER ;
+
+
+DELIMITER //
+CREATE PROCEDURE GetQuestion()
+BEGIN
+
+
+	CREATE TEMPORARY TABLE OptionsWithAnswer (
+                               quizId varchar(50) NOT NULL
+                       ,       questionId int NOT NULL
+                       ,       possibleAnswer varchar(50) NOT NULL
+                       ,       playerAnswer varchar(12) NULL);
+
+	SELECT DISTINCT quizId,questionId,question,answer 
+	FROM Questions q
+	,    Answers   a
+	WHERE q.quizId = 'WorldCup'
+	AND   a.questionId = q.questionId
+	AND   q.quizId = a.quizId
+	AND   q.playerId = 
+	
+END //
+DELIMITER ;
