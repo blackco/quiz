@@ -67,12 +67,31 @@ DELIMITER //
 CREATE PROCEDURE GetScores()
 BEGIN
 
-	 SELECT playerId,count(*) score
-         FROM Answers a, Questions q 
-         WHERE a.quizId = q.quizId 
-         AND  a.questionId = q.questionId 
-         AND  q.answer = a.answer 
-         GROUP BY playerId;
+	CREATE TEMPORARY TABLE IF NOT EXISTS leagueTable (
+                               playerId varchar(50) NOT NULL
+                       ,       score int NOT NULL);
+
+	 INSERT leagueTable
+	 SELECT "Colin",0;
+
+	 INSERT leagueTable
+	 SELECT "Wendy",0;
+	
+	 CREATE TEMPORARY TABLE IF NOT EXISTS scores ( 
+	 	SELECT playerId, count(*) score
+         	FROM Answers a, Questions q
+         	WHERE a.quizId = q.quizId
+         	AND  a.questionId = q.questionId
+         	AND  q.answer = a.answer
+         	GROUP BY playerId );
+
+	 SELECT l.playerId, s.score
+	 FROM leagueTable l
+	 LEFT JOIN scores s
+	 ON l.playerId = s.playerId;
+
+
+
 END //
 DELIMITER ;
 
