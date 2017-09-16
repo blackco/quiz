@@ -12,7 +12,7 @@ angular.module('myApp.scores', ['ngRoute'])
 .controller('scoresCtrl', ['$scope', '$http',
                           function($scope, $http) {
 	   
-	$http.get('games/get_scores.php')
+	$http.get('http://localhost:8000/games/get_scores.php')
        .success(function(data,status,headers,config,statusText){
                $scope.HttpStatus = status;
                $scope.HttpHeaders = headers;

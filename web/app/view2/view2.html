@@ -2,7 +2,12 @@
 
 <input type="hidden" name="game" value={{quizId}} />
 <input type="hidden" name="player" value="Colin"/>
-<input type="hidden" name="questions" value={{questions.length}} />
+<input type="hidden" name="questions" value={{questions}} />
+<input type="hidden" name="numberOfQuestions" value="3" />
+
+<script>
+	var q = 0;
+</script>
 
 <ul class="list_group" ng-repeat="question in questions">
 	
@@ -15,7 +20,16 @@
   			{{possibleAnswer.text}}</label>
 	</div>
 
+	<script>
+		var q = q+1;
+        	document.getElementById('numberOfQuestions').innerHTML = q;
+	</script>
+
 </ul>
+
+<script>
+</script>
+
 <input type="submit" class="btn btn-info btn-block" value="Submit">
 </form>
 

@@ -11,27 +11,23 @@
 	$answers = Array();
 	$factory = new MySqlAnswerFactory();
 	
-	$answer = new Answer();
+
+	echo 'Number Of Questions =' . $_POST['numberOfQuestions'];
 	
-	$answer->questionId= 1;
+	for ( $x=1; $x<$_POST['numberOfQuestions'];$x++) {
 
-	$answer->answer	= $_POST['1'];
-	$answer->playerId= $_POST['player'];
-	$answer->quizId	= $_POST['game'];
+		$answer = new Answer();
 
-	array_push($answers, $answer);
+        	$answer->questionId= $x;
+        	$answer->answer = $_POST[$x];
+        	$answer->playerId= $_POST['player'];
+        	$answer->quizId = $_POST['game'];
 
- 	$answer = new Answer();
+        	array_push($answers, $answer);
 
-        $answer->questionId= 2;
+	}
 
-        $answer->answer = $_POST['2'];
-        $answer->playerId= $_POST['player'];
-        $answer->quizId = $_POST['game'];
-
- 	array_push($answers, $answer);
-
-	$factory->set($answers); 
+	$factory->set($answers);
  ?>
  Thank you for playing, <a href="/#!/view1"> Choose your next game or play again</a>
  </body>
